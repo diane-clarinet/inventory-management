@@ -53,3 +53,7 @@ logs/
 
 # Environment variables
 .env
+
+# Local tooling and browser test artifacts
+.tools/
+.playwright-mcp/

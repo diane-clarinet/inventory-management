@@ -74,6 +74,50 @@
           </table>
         </div>
       </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">{{ t('orders.submitted.title') }} ({{ restockOrders.length }})</h3>
+        </div>
+        <div v-if="restockError" class="error">{{ restockError }}</div>
+        <div v-else-if="restockOrders.length === 0" class="empty-state">{{ t('orders.submitted.empty') }}</div>
+        <div v-else class="table-container">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th class="col-order-number">{{ t('orders.table.orderNumber') }}</th>
+                <th class="col-items">{{ t('orders.table.items') }}</th>
+                <th class="col-value">{{ t('orders.submitted.total') }}</th>
+                <th class="col-date">{{ t('orders.submitted.submittedDate') }}</th>
+                <th class="col-date">{{ t('orders.submitted.leadTime') }}</th>
+                <th class="col-date">{{ t('orders.table.expectedDelivery') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="ro in restockOrders" :key="ro.id">
+                <td class="col-order-number"><strong>{{ ro.order_number }}</strong></td>
+                <td class="col-items">
+                  <details class="items-details">
+                    <summary class="items-summary">
+                      {{ t('orders.itemsCount', { count: ro.items.length }) }}
+                    </summary>
+                    <div class="items-dropdown">
+                      <div v-for="item in ro.items" :key="item.item_sku" class="item-entry">
+                        <span class="item-name">{{ item.item_name }}</span>
+                        <span class="item-meta">{{ t('orders.quantity') }}: {{ item.quantity }} @ {{ formatMoney(item.unit_cost, 2) }}</span>
+                      </div>
+                    </div>
+                  </details>
+                </td>
+                <td class="col-value"><strong>{{ formatMoney(ro.total_cost, 2) }}</strong></td>
+                <td class="col-date">{{ formatDate(ro.submitted_date) }}</td>
+                <td class="col-date">{{ ro.lead_time_days }}</td>
+                <td class="col-date">{{ formatDate(ro.expected_delivery) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -83,6 +127,7 @@ import { ref, onMounted, watch, computed } from 'vue'
 import { api } from '../api'
 import { useFilters } from '../composables/useFilters'
 import { useI18n } from '../composables/useI18n'
+import { formatCurrencyWithDecimals } from '../utils/currency'
 
 export default {
   name: 'Orders',
@@ -95,6 +140,20 @@ export default {
     const loading = ref(true)
     const error = ref(null)
     const orders = ref([])
+    const restockOrders = ref([])
+    const restockError = ref(null)
+
+    const formatMoney = (amount, decimals = 0) =>
+      formatCurrencyWithDecimals(amount, currentCurrency.value, decimals)
+
+    const loadRestockOrders = async () => {
+      try {
+        restockError.value = null
+        restockOrders.value = await api.getRestockOrders()
+      } catch (err) {
+        restockError.value = 'Failed to load submitted orders: ' + err.message
+      }
+    }
 
     // Use shared filters
     const {
@@ -146,20 +205,28 @@ export default {
     const formatDate = (dateString) => {
       const { currentLocale } = useI18n()
       const locale = currentLocale.value === 'ja' ? 'ja-JP' : 'en-US'
-      return new Date(dateString).toLocaleDateString(locale, {
+      // Date-only strings parse as UTC and display a day early in western timezones
+      const date = /^\d{4}-\d{2}-\d{2}$/.test(dateString) ? new Date(`${dateString}T00:00:00`) : new Date(dateString)
+      return date.toLocaleDateString(locale, {
         year: 'numeric',
         month: 'short',
         day: 'numeric'
       })
     }
 
-    onMounted(loadOrders)
+    onMounted(() => {
+      loadOrders()
+      loadRestockOrders()
+    })
 
     return {
       t,
       loading,
       error,
       orders,
+      restockOrders,
+      restockError,
+      formatMoney,
       getOrdersByStatus,
       getOrderStatusClass,
       formatDate,
@@ -210,7 +277,7 @@ export default {
 
 .items-summary {
   cursor: pointer;
-  color: #3b82f6;
+  color: var(--info);
   font-weight: 500;
   list-style: none;
   user-select: none;
@@ -224,7 +291,7 @@ export default {
 .items-summary::before {
   content: '▶';
   display: inline-block;
-  margin-right: 0.375rem;
+  margin-right: var(--space-1);
   font-size: 0.75rem;
   transition: transform 0.2s;
 }
@@ -234,7 +301,7 @@ export default {
 }
 
 .items-summary:hover {
-  color: #2563eb;
+  color: var(--info);
   text-decoration: underline;
 }
 
@@ -243,12 +310,12 @@ export default {
   position: absolute;
   top: 100%;
   left: 0;
-  margin-top: 0.5rem;
+  margin-top: var(--space-2);
   background: white;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--ink-200);
   border-radius: 8px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  padding: 0.75rem;
+  padding: var(--space-3);
   z-index: 10;
   min-width: 300px;
   max-width: 400px;
@@ -257,9 +324,9 @@ export default {
 .item-entry {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  padding: 0.5rem;
-  border-bottom: 1px solid #f1f5f9;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--ink-100);
 }
 
 .item-entry:last-child {
@@ -269,11 +336,17 @@ export default {
 .item-name {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #0f172a;
+  color: var(--ink-900);
 }
 
 .item-meta {
   font-size: 0.813rem;
-  color: #64748b;
+  color: var(--ink-500);
+}
+
+.empty-state {
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--ink-500);
 }
 </style>
