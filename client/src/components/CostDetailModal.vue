@@ -156,18 +156,19 @@ const close = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(15 23 42 / 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2000;
-  padding: 1rem;
+  padding: var(--space-4);
 }
 
 .modal-container {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-md);
+  border: var(--border-pop);
+  box-shadow: var(--shadow-pop);
   max-width: 600px;
   width: 100%;
   max-height: 90vh;
@@ -180,23 +181,23 @@ const close = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
+  padding: var(--space-5);
+  border-bottom: 1px solid var(--ink-200);
 }
 
 .modal-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--ink-900);
   letter-spacing: -0.025em;
 }
 
 .close-button {
   background: none;
   border: none;
-  color: #64748b;
+  color: var(--ink-500);
   cursor: pointer;
-  padding: 0.5rem;
+  padding: var(--space-2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,28 +206,28 @@ const close = () => {
 }
 
 .close-button:hover {
-  background: #f1f5f9;
-  color: #0f172a;
+  background: var(--ink-100);
+  color: var(--ink-900);
 }
 
 .modal-body {
   flex: 1;
   overflow-y: auto;
-  padding: 2rem;
+  padding: var(--space-6);
 }
 
 .cost-summary {
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-6);
 }
 
 .summary-card {
-  padding: 1.5rem;
+  padding: var(--space-5);
   border-radius: 10px;
   text-align: center;
 }
 
 .summary-card.total {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: var(--info);
   color: white;
 }
 
@@ -236,7 +237,7 @@ const close = () => {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   opacity: 0.9;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-2);
 }
 
 .summary-value {
@@ -247,18 +248,18 @@ const close = () => {
 .cost-breakdown {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
 .cost-item {
-  padding: 1.25rem;
+  padding: var(--space-4);
   border-radius: 10px;
   border: 2px solid;
 }
 
 .cost-item.procurement {
   border-color: #93c5fd;
-  background: #eff6ff;
+  background: var(--info-bg);
 }
 
 .cost-item.operational {
@@ -273,14 +274,14 @@ const close = () => {
 
 .cost-item.overhead {
   border-color: #fcd34d;
-  background: #fffbeb;
+  background: var(--warning-bg);
 }
 
 .cost-header {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
+  gap: var(--space-4);
+  margin-bottom: var(--space-2);
 }
 
 .cost-icon {
@@ -294,22 +295,22 @@ const close = () => {
 }
 
 .cost-item.procurement .cost-icon {
-  background: #3b82f6;
+  background: var(--info);
   color: white;
 }
 
 .cost-item.operational .cost-icon {
-  background: #8b5cf6;
+  background: var(--purple-500);
   color: white;
 }
 
 .cost-item.labor .cost-icon {
-  background: #10b981;
+  background: var(--success);
   color: white;
 }
 
 .cost-item.overhead .cost-icon {
-  background: #f59e0b;
+  background: var(--warning);
   color: white;
 }
 
@@ -319,46 +320,46 @@ const close = () => {
 
 .cost-name {
   font-weight: 600;
-  color: #0f172a;
+  color: var(--ink-900);
   font-size: 1rem;
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--space-1);
 }
 
 .cost-amount {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--ink-900);
 }
 
 .cost-percentage {
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--ink-500);
   font-weight: 500;
 }
 
 .modal-footer {
-  padding: 1.5rem;
-  border-top: 1px solid #e2e8f0;
+  padding: var(--space-5);
+  border-top: 1px solid var(--ink-200);
   display: flex;
   justify-content: flex-end;
 }
 
 .btn-secondary {
-  padding: 0.625rem 1.25rem;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  padding: var(--space-2) var(--space-4);
+  background: var(--ink-100);
+  border: 1px solid var(--ink-200);
   border-radius: 8px;
   font-weight: 500;
   font-size: 0.875rem;
-  color: #334155;
+  color: var(--ink-700);
   cursor: pointer;
   transition: all 0.15s ease;
   font-family: inherit;
 }
 
 .btn-secondary:hover {
-  background: #e2e8f0;
-  border-color: #cbd5e1;
+  background: var(--ink-200);
+  border-color: var(--ink-300);
 }
 
 /* Modal transition animations */

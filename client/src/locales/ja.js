@@ -6,6 +6,7 @@ export default {
     orders: '注文',
     finance: '財務',
     demandForecast: '需要予測',
+    restocking: '補充発注',
     companyName: '触媒コンポーネンツ',
     subtitle: '在庫管理システム'
   },
@@ -101,8 +102,50 @@ export default {
     }
   },
 
+  // Restocking
+  restocking: {
+    title: '補充発注',
+    description: '予測需要の増加に基づき、予算内で補充注文を計画します',
+    budget: '予算',
+    budgetHint: 'スライダーを動かすと推奨内容が再作成されます',
+    recommendation: '推奨品目',
+    noRecommendations: 'この予算で推奨できる品目はありません。',
+    selectedTotal: '選択合計',
+    remaining: '残り予算',
+    overBudget: '選択した品目が予算を{amount}超過しています。数量を減らすか選択を外してください。',
+    placeOrder: '注文する',
+    placing: '注文中...',
+    successTitle: '注文が完了しました',
+    successMessage: '注文 {orderNumber} を送信しました。リードタイム: {days}日',
+    failed: '注文に失敗しました',
+    buyAhead: '繁忙期に備えて先行購入',
+    buyAheadHelp: '有効にすると、予測需要の増加分を満たした後に残った予算を、追加の安全在庫(リードタイム+{days}日分の需要)に充てます。繁忙期の需要増や配送遅延に備え、仕入先の納品が遅れても欠品しないようにします。',
+    coversAll: 'この予算で予測需要の増加分({gapTotal})はすべて賄えています。{unspent}が未使用のため、予算を増やしても品目は追加されません。',
+    limiting: '予算が推奨内容を制限しています。予測需要の不足分をすべて賄うには、あと{amount}必要です。',
+    bufferUnspent: '安全在庫の目標をすべて満たしました。予算のうち{amount}が未使用です。',
+    bufferRow: '安全在庫のみ',
+    split: '需要 {demand} + 安全在庫 {buffer}',
+    loadFailed: '補充データの読み込みに失敗しました: ',
+    table: {
+      select: '選択',
+      item: '品目',
+      supplier: '仕入先',
+      unitCost: '単価',
+      leadTime: 'リードタイム(日)',
+      quantity: '数量',
+      lineTotal: '小計'
+    }
+  },
+
   // Orders
   orders: {
+    submitted: {
+      title: '送信済み注文',
+      empty: '送信済みの補充注文はまだありません。',
+      submittedDate: '送信日',
+      leadTime: 'リードタイム(日)',
+      total: '合計'
+    },
     title: '注文',
     description: '顧客注文の表示と管理',
     allOrders: 'すべての注文',
@@ -360,6 +403,30 @@ export default {
     'USB-C PD 100W Power Supply': 'USB-C PD 100W電源',
     'Battery Backup Power Supply': 'バッテリバックアップ電源',
     'Adjustable Bench Power Supply': '可変ベンチ電源'
+  },
+
+  purchaseOrder: {
+    createTitle: '発注書を作成',
+    viewTitle: '発注書の詳細',
+    item: '品目',
+    shortage: '不足数',
+    supplier: '仕入先',
+    quantity: '数量',
+    unitCost: '単価 (USD)',
+    unitCostShort: '単価',
+    total: '合計',
+    expectedDelivery: '納品予定日',
+    notes: '備考 (任意)',
+    notesLabel: '備考',
+    submit: '発注書を作成',
+    submitting: '作成中...',
+    poId: '発注書ID',
+    status: 'ステータス',
+    createdDate: '作成日',
+    loading: '発注書を読み込み中...',
+    loadError: '発注書の読み込みに失敗しました。',
+    createError: '発注書の作成に失敗しました。',
+    none: 'なし'
   },
 
   // Customer Names

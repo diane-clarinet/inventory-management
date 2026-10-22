@@ -6,6 +6,7 @@ export default {
     orders: 'Orders',
     finance: 'Finance',
     demandForecast: 'Demand Forecast',
+    restocking: 'Restocking',
     companyName: 'Catalyst Components',
     subtitle: 'Inventory Management System'
   },
@@ -101,8 +102,50 @@ export default {
     }
   },
 
+  // Restocking
+  restocking: {
+    title: 'Restocking',
+    description: 'Plan a restock order within your budget based on forecasted demand growth',
+    budget: 'Budget',
+    budgetHint: 'Moving the slider regenerates the recommendation',
+    recommendation: 'Recommended Items',
+    noRecommendations: 'No items to recommend for this budget.',
+    selectedTotal: 'Selected total',
+    remaining: 'Remaining',
+    overBudget: 'Selected items exceed the budget by {amount}. Reduce quantities or untick items.',
+    placeOrder: 'Place Order',
+    placing: 'Placing order...',
+    successTitle: 'Order placed',
+    successMessage: 'Order {orderNumber} submitted. Lead time: {days} days.',
+    failed: 'Failed to place order',
+    buyAhead: 'Buy ahead for peak season',
+    buyAheadHelp: 'When enabled, any budget left after covering forecasted demand growth is spent on a buffer of extra stock (lead time plus {days} days of demand). Use it to anticipate higher demand and shipping delays in an upcoming peak season, so you are not caught short if suppliers deliver late.',
+    coversAll: 'This budget already covers all forecasted demand growth ({gapTotal}). {unspent} is left unspent, so raising the budget further will not add items.',
+    limiting: 'The budget is limiting the recommendation. {amount} more would cover the full forecasted demand gap.',
+    bufferUnspent: 'Buffer targets are fully covered. {amount} of the budget is unspent.',
+    bufferRow: 'Buffer only',
+    split: 'demand {demand} + buffer {buffer}',
+    loadFailed: 'Failed to load restocking data: ',
+    table: {
+      select: 'Select',
+      item: 'Item',
+      supplier: 'Supplier',
+      unitCost: 'Unit Cost',
+      leadTime: 'Lead Time (Days)',
+      quantity: 'Quantity',
+      lineTotal: 'Line Total'
+    }
+  },
+
   // Orders
   orders: {
+    submitted: {
+      title: 'Submitted Orders',
+      empty: 'No restock orders have been submitted yet.',
+      submittedDate: 'Submitted',
+      leadTime: 'Lead Time (Days)',
+      total: 'Total'
+    },
     title: 'Orders',
     description: 'View and manage customer orders',
     allOrders: 'All Orders',
@@ -312,6 +355,30 @@ export default {
   },
 
   // Common
+  purchaseOrder: {
+    createTitle: 'Create Purchase Order',
+    viewTitle: 'Purchase Order Details',
+    item: 'Item',
+    shortage: 'Shortage',
+    supplier: 'Supplier',
+    quantity: 'Quantity',
+    unitCost: 'Unit Cost (USD)',
+    unitCostShort: 'Unit Cost',
+    total: 'Total',
+    expectedDelivery: 'Expected Delivery',
+    notes: 'Notes (optional)',
+    notesLabel: 'Notes',
+    submit: 'Create Purchase Order',
+    submitting: 'Creating...',
+    poId: 'PO ID',
+    status: 'Status',
+    createdDate: 'Created',
+    loading: 'Loading purchase order...',
+    loadError: 'Failed to load purchase order.',
+    createError: 'Failed to create purchase order.',
+    none: 'None'
+  },
+
   common: {
     loading: 'Loading...',
     error: 'Error',

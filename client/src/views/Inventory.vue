@@ -226,15 +226,15 @@ export default {
 
 <style scoped>
 .page-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-5);
 }
 
 .page-header h2 {
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--space-1);
 }
 
 .page-header p {
-  color: #64748b;
+  color: var(--ink-500);
   font-size: 0.875rem;
 }
 
@@ -242,15 +242,15 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
+  gap: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--ink-200);
 }
 
 .card-title {
   font-size: 1rem;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--ink-900);
   margin: 0;
 }
 
@@ -266,30 +266,30 @@ export default {
   left: 0.75rem;
   width: 18px;
   height: 18px;
-  color: #94a3b8;
+  color: var(--ink-400);
   pointer-events: none;
 }
 
 .search-input {
   width: 100%;
-  padding: 0.5rem 2.5rem 0.5rem 2.5rem;
-  border: 1px solid #cbd5e1;
+  padding: var(--space-2) var(--space-6) var(--space-2) var(--space-6);
+  border: 1px solid var(--ink-300);
   border-radius: 8px;
   font-size: 0.875rem;
-  color: #0f172a;
-  background: #f8fafc;
+  color: var(--ink-900);
+  background: var(--paper);
   transition: all 0.2s;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: var(--info);
   background: white;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .search-input::placeholder {
-  color: #94a3b8;
+  color: var(--ink-400);
 }
 
 .clear-search {
@@ -298,18 +298,18 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.25rem;
+  padding: var(--space-1);
   background: transparent;
   border: none;
   border-radius: 4px;
-  color: #94a3b8;
+  color: var(--ink-400);
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .clear-search:hover {
-  background: #e2e8f0;
-  color: #64748b;
+  background: var(--ink-200);
+  color: var(--ink-500);
 }
 
 .clear-search svg {
@@ -319,13 +319,13 @@ export default {
 
 .loading,
 .error {
-  padding: 2rem;
+  padding: var(--space-6);
   text-align: center;
-  color: #64748b;
+  color: var(--ink-500);
 }
 
 .error {
-  color: #ef4444;
+  color: var(--danger);
 }
 
 .clickable-row {
@@ -334,6 +334,20 @@ export default {
 }
 
 .clickable-row:hover {
-  background: #eff6ff !important;
+  background: var(--info-bg) !important;
+}
+.table-container {
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .card-header {
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  .search-box {
+    min-width: 0;
+    width: 100%;
+  }
 }
 </style>
